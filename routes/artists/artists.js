@@ -6,7 +6,9 @@ const cheerio = require('cheerio')
 const artistRoutes = express.Router()
 
 artistRoutes.get('/popular', async (req, res) => {
-    const page = await unirest.get('http://sefon.pro/').headers({
+    const CookieJar = unirest.jar();
+    CookieJar.add(unirest.cookie('authorized=0'));
+    const page = await unirest.get('http://sefon.pro/').jar(CookieJar).headers({
       'Accept': 'application/json',
       'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36"
     })
