@@ -6,13 +6,17 @@ const cheerio = require('cheerio')
 const artistRoutes = express.Router()
 
 artistRoutes.get('/popular', async (req, res) => {
-    const page = await unirest.get('https://sefon.pro/').headers({
-        'Content-Type': 'application/x-www-form-urlencoded'
+    const page = await unirest.get('https://sefon.pro/', {
+        head: {
+            "X-Mashape-Key": "KEY",
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Accept": "application/json"
+        }
     })
     const $ = cheerio.load(page.body)
     const result = []
     
-    console.log(page)
+    console.log(page.error)
 
     $('.b_list_artists .ul.only_one_line .li').get().map(el => {
         const element = $(el).get()
@@ -22,7 +26,6 @@ artistRoutes.get('/popular', async (req, res) => {
             img: $(element).find('img').attr('src') ? $(element).find('img').attr('src') : $(element).find('img').attr('data-src')
         })
     })
-    console.log(result)
 
     return res.json(result.slice(0, 7))
 })
@@ -62,7 +65,7 @@ artistRoutes.get('/get/:artist/music', async (req, res) => {
         const element = $(el).get()
         response.push({
             artists: {
-                title:$(element).find('.artist_name').text(),
+                title: $(element).find('.artist_name').text(),
                 members: $(element).find('.artist_name')
             },
             songInfo: {
