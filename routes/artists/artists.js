@@ -29,7 +29,7 @@ artistRoutes.get('/get/:artist', async (req, res) => {
     const response = {}
 
     response["name"] = $(".b_artist_info h1[itemprop='name']").text()
-    response["image"] = $(".b_artist_info img").attr().src
+    response["image"] = $(".b_artist_info img").attr()?.src
     response["tracksCount"] = $(".b_artist_info span[itemprop='numTracks']").text()
 
     return res.json(response)
