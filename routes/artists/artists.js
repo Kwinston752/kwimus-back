@@ -11,7 +11,6 @@ artistRoutes.get('/popular', async (req, res) => {
     const result = []
     
     console.log(page)
-    console.log($)
 
     $('.b_list_artists .ul.only_one_line .li').get().map(el => {
         const element = $(el).get()
