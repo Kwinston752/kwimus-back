@@ -6,7 +6,9 @@ const cheerio = require('cheerio')
 const artistRoutes = express.Router()
 
 artistRoutes.get('/popular', async (req, res) => {
-    const page = await unirest.get('https://sefon.pro/')
+    const page = await unirest.get('https://sefon.pro/').headers({
+        'Content-Type': 'application/x-www-form-urlencoded'
+    })
     const $ = cheerio.load(page.body)
     const result = []
     
