@@ -8,7 +8,7 @@ const artistRoutes = express.Router()
 artistRoutes.get('/popular', async (req, res) => {
     const page = await unirest.get('http://sefon.pro/').headers({
       'Accept': 'application/json',
-      'User-Agent': '"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36"'
+      'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36"
     })
     const $ = cheerio.load(page.body)
     const result = []
