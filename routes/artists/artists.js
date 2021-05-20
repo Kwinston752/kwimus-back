@@ -9,6 +9,9 @@ artistRoutes.get('/popular', async (req, res) => {
     const page = await unirest.get('https://sefon.pro/')
     const $ = cheerio.load(page.body)
     const result = []
+    
+    console.log(page)
+    console.log($)
 
     $('.b_list_artists .ul.only_one_line .li').get().map(el => {
         const element = $(el).get()
@@ -18,6 +21,7 @@ artistRoutes.get('/popular', async (req, res) => {
             img: $(element).find('img').attr('src') ? $(element).find('img').attr('src') : $(element).find('img').attr('data-src')
         })
     })
+    console.log(result)
 
     return res.json(result.slice(0, 7))
 })
