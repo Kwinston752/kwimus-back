@@ -5,12 +5,18 @@ const cheerio = require('cheerio')
 
 // Utils
 const decodeUrl = require('./../../utils/decodeUrl')
+const axios = require('axios')
 
 const artistRoutes = express.Router()
 
 artistRoutes.get('/popular', async (req, res) => {
-    const page = await unirest.get('http://sefon.pro/')
-    const $ = cheerio.load(page.body)
+    // const page = await unirest.get('http://sefon.pro/', {
+    //     'User-Agent': ''
+    // })
+
+    const page = await axios.get('http://sefon.pro/')
+
+    const $ = cheerio.load(page.data)
     const result = []
 
     $('.b_list_artists .ul.only_one_line .li').get().map(el => {
