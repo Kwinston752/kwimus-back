@@ -12,6 +12,8 @@ artistRoutes.get('/popular', async (req, res) => {
     const page = await unirest.get('http://sefon.pro/')
     const $ = cheerio.load(page.body)
     const result = []
+    
+    return res.json(page)
 
     $('.b_list_artists .ul.only_one_line .li').get().map(el => {
         const element = $(el).get()
