@@ -5,12 +5,12 @@ const cheerio = require('cheerio')
 
 // Utils
 const decodeUrl = require('./../../utils/decodeUrl')
-const axios = require('axios')
 
 const artistRoutes = express.Router()
 
 artistRoutes.get('/popular', async (req, res) => {
     const page = await unirest.get('http://sefon.pro/')
+    return res.json(page)
 
     const $ = cheerio.load(page.data)
     const result = []
