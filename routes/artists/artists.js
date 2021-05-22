@@ -10,11 +10,7 @@ const axios = require('axios')
 const artistRoutes = express.Router()
 
 artistRoutes.get('/popular', async (req, res) => {
-    // const page = await unirest.get('http://sefon.pro/', {
-    //     'User-Agent': ''
-    // })
-
-    const page = await axios.get('http://sefon.pro/')
+    const page = await unirest.get('http://sefon.pro/')
 
     const $ = cheerio.load(page.data)
     const result = []
