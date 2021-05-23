@@ -9,11 +9,10 @@ const decodeUrl = require('./../../utils/decodeUrl')
 const artistRoutes = express.Router()
 
 artistRoutes.get('/popular', async (req, res) => {
-    const page = await unirest.get('http://sefon.pro/').headers({
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36'
-    })
+    const page = await unirest.get('http://sefon.pro/')
+    return res.json(page)
 
-    const $ = cheerio.load(page.body)
+    const $ = cheerio.load(page.data)
     const result = []
 
     $('.b_list_artists .ul.only_one_line .li').get().map(el => {
