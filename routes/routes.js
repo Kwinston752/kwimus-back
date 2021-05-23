@@ -9,8 +9,4 @@ router.use('/artists', artistRoutes)
 router.use('/genres', genresRoutes)
 router.use('/musics', musicsRoutes)
 
-router.use('/', async (req, res) => {
-    return res.send('Hello World!')
-})
-
 module.exports = router
